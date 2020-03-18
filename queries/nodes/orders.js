@@ -11,11 +11,9 @@ exports.createOrder = async ({ uid }, { product_id, quantity }) => {
 };
 
 exports.updateOrder = async ({ uid }, { id, firebaseId, status }) => {
-    const order = await dataRef.doc('customer_orders').collection('orders').where('firebase_id', '==', firebaseId).get();
-    console.log(order);
-    const update = order.update({
+    const order = await dataRef.doc('customer_orders').collection('orders').doc(firebaseId).update({
         status
-    });
+    })
 
-    return data;
+    return order;
 };
