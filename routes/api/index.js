@@ -12,6 +12,7 @@ router.post('/admin/create', AdminController.createAdmin);
 
 // Products
 router.get('/products', auth, ProductController.getAllProducts);
+router.get('/products/:id', auth, ProductController.getAllProductDetail);
 router.post('/products/create', admin, ProductController.createProduct);
 
 // Customers

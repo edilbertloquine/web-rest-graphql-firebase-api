@@ -1,6 +1,7 @@
 const { 
     createProduct,
-    getAllProducts
+    getAllProducts,
+    getProductDetail
 } = require('../queries/gql/products');
 
 exports.getAllProducts = async (req, res) => {
@@ -10,6 +11,22 @@ exports.getAllProducts = async (req, res) => {
         return res.send({
             success: true,
             products
+        });
+    } catch (error) {
+        return res.status(500).send({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
+exports.getAllProductDetail = async (req, res) => {
+    try {
+        const product = await getProductDetail({ id: req.params.id });
+
+        return res.send({
+            success: true,
+            product
         });
     } catch (error) {
         return res.status(500).send({

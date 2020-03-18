@@ -26,6 +26,40 @@ exports.getAllProducts = async () => {
     }
 };
 
+exports.getProductDetail = async ({ id }) => {
+    try {
+        const query = gql`
+            query ($id: Int!) {
+                products (where: {
+                    id: {
+                        _eq: $id
+                    }
+                }) {
+                    id
+                    sku
+                    name
+                    description
+                    price
+                    stock
+                }
+            }
+        `;
+
+        const result = await client.query({
+            query,
+            variables: {
+                id
+            }
+        });
+
+        console.log(result);
+
+        return result.data.products[0];
+    } catch (error) {
+        throw error;
+    }
+};
+
 exports.createProduct = async ({
     sku,
     name, 
