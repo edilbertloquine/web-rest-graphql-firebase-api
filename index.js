@@ -14,8 +14,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
+app.get('/welcome/', (req, res) => {
+    res.send('welcome');
+});
+
 app.use('/api/v1', routes);
 
-app.listen(process.env.PORT, () => {
-    console.log(`server running on port ${process.env.PORT}`);
+app.listen('8080', '0.0.0.0', () => {
+    console.log(`server running on http://0.0.0.0:8080`);
 });
